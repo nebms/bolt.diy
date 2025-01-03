@@ -21,6 +21,7 @@ services:
     command: pnpm run dockerstart
     profiles:
       - production
+    restart: unless-stopped
 
   app-dev:
     image: bolt-ai:development
@@ -44,8 +45,11 @@ services:
         source: .
         target: /app
         consistency: cached
-      - /app/node_modules
     ports:
-      - "5173:5173"
-    command: pnpm run dev --host 0.0.0.0
+      - "5174:5173"
+    command: ["pnpm", "run", "dev", "--host", "0.0.0.0"]
     profiles: ["development", "default"]
+    restart: unless-stopped
+
+volumes:
+  node_modules:
