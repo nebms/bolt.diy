@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   app-prod:
     image: bolt-ai:production
@@ -9,9 +7,9 @@ services:
       target: bolt-ai-production
     ports:
       - "5173:5173"
-    env_file: ".env.local"
     environment:
       - NODE_ENV=production
+      - COMPOSE_PROFILES=production
       - PORT=5173
       - VITE_LOG_LEVEL=${VITE_LOG_LEVEL:-debug}
       - DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX:-32768}
